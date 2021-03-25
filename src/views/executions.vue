@@ -2,7 +2,14 @@
   <div>
     <v-card class="mx-auto" max-width="90%" tile>
       <v-list>
-        <v-subheader>Executions {{this.$route.params.id}}</v-subheader>
+        <v-subheader
+          >Executions {{ this.$route.params.id
+          }}<v-progress-circular
+            v-if="loading"
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
+        </v-subheader>
         <v-list-item-group color="primary">
           <v-list-item
             v-for="(item, i) in items"
@@ -40,7 +47,8 @@ export default {
     return {
       itemClicked: {},
       items: [],
-      popup: false
+      popup: false,
+      loading: true
     };
   },
 
@@ -69,6 +77,11 @@ export default {
   },
   created() {
     this.fetchExecutions();
+  },
+  updated: function() {
+    this.$nextTick(function() {
+      this.loading = false;
+    });
   }
 };
 </script>

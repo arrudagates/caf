@@ -1,7 +1,13 @@
 <template>
   <v-card class="mx-auto" max-width="90%" tile>
     <v-list>
-      <v-subheader>Reports</v-subheader>
+      <v-subheader
+        >Reports<v-progress-circular
+          v-if="loading"
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </v-subheader>
       <v-list-item-group color="primary">
         <v-list-item v-for="(item, i) in items" :key="i" @click="clicked(item)">
           <v-list-item-content>
@@ -18,7 +24,8 @@
 export default {
   data() {
     return {
-      items: []
+      items: [],
+      loading: true
     };
   },
 
@@ -41,6 +48,11 @@ export default {
   },
   created() {
     this.fetchReports();
+  },
+  updated: function() {
+    this.$nextTick(function() {
+      this.loading = false;
+    });
   }
 };
 </script>

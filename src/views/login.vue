@@ -14,6 +14,11 @@
           <v-btn color="" @click="login">
             Login
           </v-btn>
+          <v-progress-circular
+            v-if="loading"
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
         </v-col>
       </v-container>
     </v-form>
@@ -25,12 +30,14 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      loading: false
     };
   },
 
   methods: {
     login() {
+      this.loading = true;
       this.$store
         .dispatch("login", {
           email: this.email,
