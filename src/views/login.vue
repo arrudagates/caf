@@ -1,19 +1,9 @@
 <template>
   <div>
-
-   <v-form>
-    <v-container>
-
-        <v-col
-          cols="1"
-          md="4"
-          class="column"
-        >
-          <v-text-field
-            v-model="email"
-            label="Email"
-            required
-          ></v-text-field>
+    <v-form>
+      <v-container>
+        <v-col cols="1" md="4" class="column">
+          <v-text-field v-model="email" label="Email" required></v-text-field>
 
           <v-text-field
             v-model="password"
@@ -21,50 +11,44 @@
             label="Password"
             required
           ></v-text-field>
-          <v-btn
-              color=""
-
-              @click="login"
-          >
-              Login
+          <v-btn color="" @click="login">
+            Login
           </v-btn>
         </v-col>
-
-    </v-container>
-   </v-form>
-
+      </v-container>
+    </v-form>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      email: '',
-      password: ''
-    }
+      email: "",
+      password: ""
+    };
   },
 
   methods: {
-    login () {
+    login() {
       this.$store
-        .dispatch('login', {
+        .dispatch("login", {
           email: this.email,
           password: this.password
         })
         .then(() => {
-          this.$router.push({ name: 'reports' })
+          this.$router.push({ name: "reports" });
         })
         .catch(err => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     }
   }
- }
+};
 </script>
 <style>
- .column {
-     margin-right: auto;
-     margin-left: auto;
- }
+.column {
+  margin-right: auto;
+  margin-left: auto;
+}
 </style>
