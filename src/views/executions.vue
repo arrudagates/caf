@@ -1,46 +1,51 @@
 <template>
+<div>
   <v-card
     class="mx-auto"
     max-width="90%"
     tile
   >
-    <v-list>
-      <v-subheader>Reports</v-subheader>
+    <v-list >
+      <v-subheader>Executions</v-subheader>
       <v-list-item-group
         color="primary"
       >
         <v-list-item
           v-for="(item, i) in items"
             :key="i"
-            @click="clicked(item)"
+            @click="itemClicked = item; popup = true"
         >
           <v-list-item-content>
-              <v-list-item-title v-text="item._id + ' (' + item.name + ')'"></v-list-item-title>
+              <v-list-item-title v-text="item._id + ' (' + item.sections.ocr.name + ')'"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
     </v-list>
   </v-card>
+  <popup v-if="popup" :dialog="popup" :item="itemClicked" @interface="popup = false"/>
+  </div>
 </template>
 <script>
+ import popup from '../components/popup.vue';
  export default {
+     components: {
+         popup
+     },
      data () {
          return {
+             itemClicked: {},
              items: [],
+             popup: false
          }
      },
 
      methods: {
-         clicked(item) {
-             console.log(item)
-             this.$router.push({ name: 'executions', params:{id: item._id}})
-         },
-         fetchReports () {
+         fetchExecutions () {
              this.$store
-                 .dispatch('getReports')
+                 .dispatch('getExecutions', {id: this.$route.params.id})
                  .then(({data}) => {
-                     this.items = data.body
-                     console.log(data)
+                     this.items = data.docs;
+                     console.log(this.items)
                  })
                  .catch(err => {
                      console.log(err)
@@ -48,17 +53,14 @@
          }
      },
      created(){
-         this.fetchReports();
+         this.fetchExecutions();
 
      }
  }
 </script>
 <style>
- .mx-auto {
+ .column {
      margin-right: auto;
      margin-left: auto;
- }
- .v-list {
-     background-color: #2c2f33 !important;
  }
 </style>

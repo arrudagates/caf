@@ -1,11 +1,38 @@
 <template>
   <div>
-    <h1>Login</h1>
-    <form @submit.prevent="login">
-      <input type="email" name="email" v-model="email">
-      <input type="password" name="password" v-model="password">
-      <button type="submit">Login</button>
-    </form>
+
+   <v-form>
+    <v-container>
+
+        <v-col
+          cols="1"
+          md="4"
+          class="column"
+        >
+          <v-text-field
+            v-model="email"
+            label="Email"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="password"
+            type="password"
+            label="Password"
+            required
+          ></v-text-field>
+          <v-btn
+              color=""
+
+              @click="login"
+          >
+              Login
+          </v-btn>
+        </v-col>
+
+    </v-container>
+   </v-form>
+
   </div>
 </template>
 
@@ -35,3 +62,9 @@ export default {
   }
  }
 </script>
+<style>
+ .column {
+     margin-right: auto;
+     margin-left: auto;
+ }
+</style>

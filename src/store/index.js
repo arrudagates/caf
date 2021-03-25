@@ -15,7 +15,7 @@ export default new Vuex.Store({
     setUserData (state, userData) {
       state.user = userData
       localStorage.setItem('user', JSON.stringify(userData))
-      axios.defaults.headers.common.Authorization = userData.accessToken
+      axios.defaults.headers.common.authorization = userData.idToken
     },
 
     clearUserData () {
@@ -29,7 +29,6 @@ export default new Vuex.Store({
       return axios
         .post('/auth/signin', credentials)
         .then(({ data }) => {
-          console.log(data)
           commit('setUserData', data)
         })
     },
@@ -37,9 +36,11 @@ export default new Vuex.Store({
    getReports() {
       return axios
        .get('/reports')
-        .then(({ data }) => {
-          console.log("data", data);
-        })
+    },
+    getExecutions(j, id) {
+      return axios
+       .get(`/reports/${id.id}/executions`)
+
     },
 
     logout ({ commit }) {

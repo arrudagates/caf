@@ -3,12 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+
   created () {
     const userInfo = localStorage.getItem('user')
     if (userInfo) {
@@ -19,11 +21,13 @@ new Vue({
       response => response,
       error => {
         if (error.response.status === 401) {
-        //  this.$store.dispatch('logout')
+          this.$store.dispatch('logout')
         }
         return Promise.reject(error)
       }
     )
   },
+
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
