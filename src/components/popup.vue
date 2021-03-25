@@ -43,12 +43,6 @@
                       readonly
                       :value="this.item.validations[this.item.validations.length - 1].title"
                   />
-                  <v-text-field
-                      v-if="item.status != 'APROVADO'"
-                      label="Ultima Validação"
-                      readonly
-                      :value="this.item.validations[this.item.validations.length - 1].title"
-                  />
                   Fraude:
                   <v-icon>{{ item.fraud ? 'mdi-check' : 'mdi-cancel' }}</v-icon>
                   <v-select
@@ -100,23 +94,26 @@
      props: {
          dialog: { type: Boolean, default: false },
          item: { type: Object },
+         images: { type: Array }
      },
      beforeMount() {
          this.popup = this.dialog;
+         this.imagesData = this.images;
      },
      watch: {
+         // item: function(event) {
+         //     console.log(event)
+         //     this.imagesData = []
+         //     for ( var property in this.item.images ) {
+         //         this.images.push({"property": property, "url": this.item.images[property]})
+         //     }
+         //    console.log(this.imagesData)
+         //         },
          popup: function(event) {
              if (event == false) {
                  this.$emit('interface')
              }
          },
-    item: function() {
-       this.imagesData = []
-             for ( var property in this.item.images ) {
-                 this.imagesData.push({"property": property, "url": this.item.images[property]})
-             }
-        console.log(this.imagesData)
-    }
     },
      methods: {
          change(){

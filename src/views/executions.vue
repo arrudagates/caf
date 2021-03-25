@@ -22,7 +22,7 @@
       </v-list-item-group>
     </v-list>
   </v-card>
-  <popup v-if="popup" :dialog="popup" :item="itemClicked" @interface="popup = false"/>
+  <popup v-if="popup" :images="images()" :dialog="popup" :item="itemClicked" @interface="popup = false"/>
   </div>
 </template>
 <script>
@@ -40,6 +40,13 @@
      },
 
      methods: {
+         images(){
+             let imagesData = []
+             for ( var property in this.itemClicked.images ) {
+                 imagesData.push({"property": property, "url": this.itemClicked.images[property]})
+             }
+                 return imagesData
+         },
          fetchExecutions () {
              this.$store
                  .dispatch('getExecutions', {id: this.$route.params.id})
