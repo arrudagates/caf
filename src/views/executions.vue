@@ -20,9 +20,9 @@
             "
           >
             <v-list-item-content>
-              <v-list-item-title
-                v-text="item._id + ' (' + item.sections.ocr.name + ')'"
-              ></v-list-item-title>
+                <v-list-item-title
+                    v-text="item._id + ' (' + (item.sections.ocr ? item.sections.ocr.name : 'Name not available') + ')'"
+                ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>

@@ -7,22 +7,22 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-col>
-              <v-text-field
-                label="Nome"
-                readonly
-                :value="item.sections.ocr.name"
-              />
-              <v-text-field
-                label="CPF"
-                readonly
-                :value="item.sections.ocr.cpf"
-              />
-              <v-text-field
-                label="Data do Documento"
-                readonly
-                :value="item.sections.ocr.issueDate"
-              />
+              <v-col>
+                  <v-text-field
+                      label="Nome"
+                      readonly
+                      :value="item.sections.ocr ? item.sections.ocr.name : item.data.name ? item.data.name : 'Name not found'"
+                  />
+                  <v-text-field
+                      label="CPF"
+                      readonly
+                      :value="item.sections.ocr ? item.sections.ocr.cpf : item.data.cpf ? item.data.cpf : 'CPF not found'"
+                  />
+                  <v-text-field
+                      label="Data do Documento"
+                      readonly
+                      :value="item.sections.ocr ? item.sections.ocr.issueDate : item.data.issueDate ? item.data.issueDate : 'Issue date not found'"
+                  />
               <v-text-field label="Tipo" readonly :value="item.type" />
               <v-text-field label="ID" readonly :value="item._id" />
               <v-text-field
